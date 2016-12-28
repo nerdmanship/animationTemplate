@@ -1,7 +1,8 @@
-body {
-  background-color: #ccc;
+
+body,
+#header,
+#verdict-module {
+  width: 100%;
+  overflow: hidden;
 }
 
-svg {
-  height: 100%;
-}

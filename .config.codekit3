@@ -1879,19 +1879,37 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/src\/assets\/newFence.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 0,
+		"oAP": "\/dist\/assets\/opt\/newFence.svg",
+		"oF": 0,
+		"opt": 1,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"\/src\/assets\/scene.sketch": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/dist\/assets\/scene.sketch",
+		"oF": 0
+		},
+	"\/src\/assets\/scene.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 0,
+		"oAP": "\/dist\/assets\/opt\/scene.svg",
+		"oF": 0,
+		"opt": 1,
+		"plM": 3758088159,
+		"prP": 0
+		},
 	"\/src\/favicon.ico": {
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/dist\/favicon.ico",
 		"oF": 0
-		},
-	"\/src\/jade\/footer.jade": {
-		"cOD": 1,
-		"ft": 512,
-		"oA": 1,
-		"oAP": "\/dist\/jade\/footer.html",
-		"oF": 0,
-		"oS": 0
 		},
 	"\/src\/jade\/head.jade": {
 		"cOD": 1,
@@ -1917,11 +1935,11 @@
 		"oF": 2,
 		"oS": 0
 		},
-	"\/src\/jade\/main.jade": {
+	"\/src\/jade\/scene.jade": {
 		"cOD": 1,
 		"ft": 512,
 		"oA": 1,
-		"oAP": "\/dist\/jade\/main.html",
+		"oAP": "\/dist\/jade\/scene.html",
 		"oF": 0,
 		"oS": 0
 		},
@@ -1947,15 +1965,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/dist\/js\/module.js",
-		"oF": 0,
-		"sC": 2,
-		"tS": 1
-		},
-	"\/src\/js\/TimelineMax.js": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "\/dist\/js\/TimelineMax.js",
 		"oF": 0,
 		"sC": 2,
 		"tS": 1
@@ -2034,10 +2043,10 @@
 	},
 "projectAttributes": {
 	"creationDate": 503551669,
-	"displayValue": "animationTemplate",
+	"displayValue": "verdictFightProto",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "brackets_teal",
-	"lastBuiltDate": 503557535
+	"lastBuiltDate": 504586774
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
