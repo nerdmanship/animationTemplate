@@ -1,1 +1,0 @@
-TweenMax.set("#Fighters_mockup", { x: -500});

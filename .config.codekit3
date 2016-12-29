@@ -1943,6 +1943,14 @@
 		"oF": 0,
 		"oS": 0
 		},
+	"\/src\/jade\/scene_w_fighters.jade": {
+		"cOD": 1,
+		"ft": 512,
+		"oA": 0,
+		"oAP": "\/dist\/jade\/scene_w_fighters.html",
+		"oF": 0,
+		"oS": 0
+		},
 	"\/src\/jade\/scripts.jade": {
 		"cOD": 1,
 		"ft": 512,
