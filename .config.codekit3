@@ -1911,6 +1911,14 @@
 		"oAP": "\/dist\/favicon.ico",
 		"oF": 0
 		},
+	"\/src\/jade\/controls.jade": {
+		"cOD": 1,
+		"ft": 512,
+		"oA": 1,
+		"oAP": "\/dist\/jade\/controls.html",
+		"oF": 0,
+		"oS": 0
+		},
 	"\/src\/jade\/head.jade": {
 		"cOD": 1,
 		"ft": 512,
@@ -1964,6 +1972,15 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "\/dist\/js\/app.js",
+		"oF": 0,
+		"sC": 2,
+		"tS": 1
+		},
+	"\/src\/js\/controls.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "\/dist\/js\/controls.js",
 		"oF": 0,
 		"sC": 2,
 		"tS": 1
@@ -2054,7 +2071,7 @@
 	"displayValue": "verdictFightProto",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "brackets_teal",
-	"lastBuiltDate": 504586774
+	"lastBuiltDate": 504836885
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
