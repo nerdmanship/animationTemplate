@@ -1882,7 +1882,7 @@
 	"\/src\/assets\/newFence.svg": {
 		"ft": 2097152,
 		"miP": 0,
-		"oA": 0,
+		"oA": 2,
 		"oAP": "\/dist\/assets\/opt\/newFence.svg",
 		"oF": 0,
 		"opt": 1,
@@ -1898,7 +1898,7 @@
 	"\/src\/assets\/scene.svg": {
 		"ft": 2097152,
 		"miP": 0,
-		"oA": 0,
+		"oA": 2,
 		"oAP": "\/dist\/assets\/opt\/scene.svg",
 		"oF": 0,
 		"opt": 1,
@@ -1979,7 +1979,7 @@
 	"\/src\/js\/controls.js": {
 		"ft": 64,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "\/dist\/js\/controls.js",
 		"oF": 0,
 		"sC": 2,
@@ -2063,6 +2063,12 @@
 			"linkedFileAbbreviatedPath": "\/src\/js\/module.js",
 			"position": 0,
 			"type": 0
+			},
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/src\/js\/controls.js",
+			"position": 1,
+			"type": 0
 			}
 		]
 	},
@@ -2071,7 +2077,7 @@
 	"displayValue": "verdictFightProto",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "brackets_teal",
-	"lastBuiltDate": 504856613
+	"lastBuiltDate": 505117303
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
@@ -3951,7 +3957,7 @@
 		"shouldRunBless": 0
 		},
 	"languageDefaultsSVG": {
-		"autoOutputAction": 0,
+		"autoOutputAction": 2,
 		"autoOutputPathFilenamePattern": "*.svg",
 		"autoOutputPathRelativePath": "opt",
 		"autoOutputPathReplace1": "",
