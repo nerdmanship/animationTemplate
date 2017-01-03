@@ -1,5 +1,7 @@
 # Quick start web animation template for offline workflow
 
+## Accidentally developed. To be reverted back to a previous version.
+
 ## Made by [the Nerdmanship](https://nerdmanship.com/)
 
 Contents
