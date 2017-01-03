@@ -93,7 +93,7 @@ const rotateConorTo = function(value, duration) {
 
 conorPose();
 
-const tlConor = new TimelineMax({ repeat: -1, repeatDelay: 2, onUpdate:updateStats });
+const tlConor = new TimelineMax({ repeat: -1, repeatDelay: 2, onUpdate:updateStats, onUpdateParams: tlConor });
 const tlConorStance = new TimelineMax({ paused: true, repeat: -1, yoyo: true });
 const tlConorWaving = new TimelineMax({ paused: true, repeat: 1  });
 
@@ -192,33 +192,39 @@ tlConor
 tlConor.play().timeScale(1);
 
 
+controlTimeline(tlConor);
 
-var duration = document.getElementById("duration"),
-    totalDuration = document.getElementById("totalDuration"),
-    repeatCount = document.getElementById("repeatCount"),
-    totalRepeatCount = document.getElementById("totalRepeatCount"),
-    time = document.getElementById("time"),
-    totalTime = document.getElementById("totalTime"),
-    progress = document.getElementById("progress"),
-    totalProgress = document.getElementById("totalProgress"),
-    restart = document.getElementById("restart"),
-    reps = 0;
+function controlTimeline(timeline) {
+  var duration = document.getElementById("duration");
+  var time = document.getElementById("time");
+  var controls = document.getElementById("controls");
 
-function updateStats() {
-  var timeline = tlConor;
+  var slider = document.createElement("INPUT");
+  slider.setAttribute("type", "range");
+  slider.setAttribute("step", "0.001");
+  slider.setAttribute("id", "slider");
+  slider.setAttribute("min", "0");
+  slider.setAttribute("max", "1");
+  controls.appendChild(slider);
 
-  time.innerHTML = timeline.time().toFixed(2);
-  totalTime.innerHTML = timeline.totalTime().toFixed(2);
-  progress.innerHTML = timeline.progress().toFixed(2);
-  totalProgress.innerHTML = timeline.totalProgress().toFixed(2);
+  slider.addEventListener("mouseover", function(){ timeline.pause(); })
+  slider.addEventListener("mouseout", function(){ timeline.resume(); })
+
+  read("mousedown");
+  read("mousemove");
+
+  function read(eventType) {
+    slider.addEventListener(eventType, function() {
+      window.requestAnimationFrame(function () {
+        timeline.progress(slider.value);
+      });
+    });
+  }
 }
 
-
-// Test all joints
-// TweenMax.staggerTo(allElems, 0.3, { rotation: 30, transformOrigin: "center", repeat:1, yoyo:true }, 0.6);
-
-
-
-
-
+function updateStats() {
+    slider.value = this.progress();
+    duration.innerHTML = this.duration().toFixed(2);
+    time.innerHTML = this.time().toFixed(2);
+  }
 
