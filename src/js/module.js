@@ -4,6 +4,21 @@
   TODO
 
   - Capital first letters may be a problem in data-attributes
+  - Open uo chest and add ambient torso movement to tlImpact
+
+
+
+// Find move
+// Rough out sequence
+// Jump back
+
+//// tlImpact
+// Conor walks slowly forward, gets hit twice in jab hand, takes impact
+// Ref: https://www.youtube.com/watch?v=vyxMIDL-I-E - 3.00
+//// tlStep, tlPush
+// Conor takes two steps forward and keep distance with jab hand ()
+//// tlPunch
+// From second push, Conor strikes hard and fast right ()
 
 
 */
@@ -180,14 +195,75 @@ const timeUnit = 0.3;
 const tlConor = new TimelineMax({ repeat: -1, repeatDelay: 2, onUpdate:updateStats, onUpdateParams: tlConor });
 const tlStep = new TimelineMax({ paused: true });
 const tlPush = new TimelineMax({ paused: true });
+const tlStepPush = new TimelineMax({ paused: true });
 const tlWiggle = new TimelineMax({ paused: true });
 const tlPunch = new TimelineMax({ paused: true });
+const tlImpact = new TimelineMax({ paused: true });
 
 
-//  STEPPING FORWARD
-//  Keywords: body, Conor, KneeBack, LegBack, LegFront
+
+//  TAKING HITS TO JAB HAND
+//  Keywords: keywords
+///////////////////////////////////////
+tlImpact.timeScale(1)
+  .add("impact1")
+
+  .to(c.LegBack, timeUnit, { rotation: 35, ease: Power1.easeNone }, "impact1")
+  .to(c.KneeBack, timeUnit/2, { rotation: -40, ease: Power1.easeNone }, "impact1")
+  .to(c.KneeBack, timeUnit/2, { rotation: -20, ease: Power1.easeNone }, "impact1 =+" + timeUnit/2)
+  .to(c.LegBack, timeUnit, { rotation: 30, ease: Power1.easeNone }, "impact1 =+" + timeUnit)
+  .to(c.KneeBack, timeUnit, { rotation: -25, ease: Power1.easeNone }, "impact1 =+" + timeUnit)
+
+  .to(c.LegFront, timeUnit, { rotation: -20, ease: Power1.easeNone }, "impact1")
+  .to(c.LegFront, timeUnit, { rotation: -10, ease: Power1.easeNone }, "impact1 =+" + timeUnit)
+  .to(c.KneeFront, timeUnit, { rotation: 0, ease: Power1.easeNone }, "impact1")
+  .to(c.KneeFront, timeUnit, { rotation: -20, ease: Power1.easeNone }, "impact1 =+" + timeUnit)
+  
+  .to(c.body, timeUnit, { rotation: -1, x: "-=15", y: 21, ease: Power1.easeNone }, "impact1")
+  .to(c.body, timeUnit, { rotation: 1, x: "-=15", y: 23, ease: Power1.easeNone }, "impact1 =+" + timeUnit)
+  
+  .add("impact2", "impact1 =+" + timeUnit*2)
+  .to(c.LegBack, timeUnit, { rotation: 35, ease: Power1.easeNone }, "impact2")
+  .to(c.KneeBack, timeUnit/2, { rotation: -40, ease: Power1.easeNone }, "impact2")
+  .to(c.KneeBack, timeUnit/2, { rotation: -20, ease: Power1.easeNone }, "impact2 =+" + timeUnit/2)
+  .to(c.LegBack, timeUnit, { rotation: 30, ease: Power1.easeNone }, "impact2 =+" + timeUnit)
+  .to(c.KneeBack, timeUnit, { rotation: -25, ease: Power1.easeNone }, "impact2 =+" + timeUnit)
+
+  .to(c.LegFront, timeUnit, { rotation: -20, ease: Power1.easeNone }, "impact2")
+  .to(c.LegFront, timeUnit, { rotation: -10, ease: Power1.easeNone }, "impact2 =+" + timeUnit)
+  .to(c.KneeFront, timeUnit, { rotation: 0, ease: Power1.easeNone }, "impact2")
+  .to(c.KneeFront, timeUnit, { rotation: -20, ease: Power1.easeNone }, "impact2 =+" + timeUnit)
+  
+  .to(c.body, timeUnit, { rotation: -2, x: "-=25", y: 20, ease: Power1.easeNone }, "impact2")
+  .to(c.body, timeUnit, { rotation: 0, x: "-=15", y: 20, ease: Power1.easeNone }, "impact2 =+" + timeUnit)
+
+  // Impacts
+  .add("hit1", "impact2")
+  .to(c.ShoulderBack, timeUnit/4, { rotation: 90}, "hit1")
+  .to(c.ShoulderBack, timeUnit/4, { rotation: 100}, "hit1 =+" + timeUnit/3)
+  .to(c.ElbowBack, timeUnit/4, { rotation: -5}, "hit1")
+  .to(c.ElbowBack, timeUnit/4, { rotation: -15}, "hit1 =+" + timeUnit/3)
+  .to(c.WristBack, timeUnit/4, { rotation: 35}, "hit1")
+  .to(c.WristBack, timeUnit/4, { rotation: 25}, "hit1 =+" + timeUnit/3)
+
+  .add("hit2", "hit1 =+" + timeUnit*1.5)
+  .to(c.ShoulderBack, timeUnit/4, { rotation: 90}, "hit2")
+  .to(c.ShoulderBack, timeUnit/4, { rotation: 100}, "hit2 =+" + timeUnit/3)
+  .to(c.ElbowBack, timeUnit/4, { rotation: -5}, "hit2")
+  .to(c.ElbowBack, timeUnit/4, { rotation: -15}, "hit2 =+" + timeUnit/3)
+  .to(c.WristBack, timeUnit/4, { rotation: 35}, "hit2")
+  .to(c.WristBack, timeUnit/4, { rotation: 25}, "hit2 =+" + timeUnit/3)
+
+  .add("afterImpact")
+  ;
+
+
+
+//  STEP PUSH
+//  Keywords: Second move
 //////////////////////////////////////
 
+//  Keywords: body, Conor, KneeBack, LegBack, LegFront
 tlStep
   .add("step1")
   .to(c.LegBack, timeUnit, { rotation: 35, ease: Power1.easeNone }, "step1")
@@ -197,7 +273,7 @@ tlStep
   .to(c.KneeBack, timeUnit, { rotation: -25, ease: Power1.easeNone }, "step1 =+" + timeUnit)
   .to(c.LegFront, timeUnit, { rotation: -25, ease: Power1.easeNone }, "step1")
   .to(c.LegFront, timeUnit, { rotation: -20, ease: Power1.easeNone }, "step1 =+" + timeUnit)
-  .to(c.body, timeUnit, { rotation: 3, x: "-=5", y: 25, ease: Power1.easeNone }, "step1")
+  .to(c.body, timeUnit, { rotation: 3, x: "-=30", y: 25, ease: Power1.easeNone }, "step1")
   .to(c.body, timeUnit, { rotation: 0, x: "-=25", y: 20, ease: Power1.easeNone }, "step1 =+" + timeUnit)
   
   .add("step2", "step1 =+" + timeUnit*2 )
@@ -211,11 +287,7 @@ tlStep
   .to(c.body, timeUnit/2, { rotation: 0, x: "-=40", y: 20, ease: Power1.easeNone }, "step2 =+" + timeUnit/2)
   ;
 
-
-//  SIGNATURE PUSH MOTION BY CONOR
 //  Keywords: ShoulderBack, Elbowback, WristBack
-//////////////////////////////////////
-
 tlPush
   .add("push1")
   .to(c.ShoulderBack, timeUnit, { rotation: 50}, "push1")
@@ -235,11 +307,7 @@ tlPush
   .add("afterPush")
   ;
 
-
-//  WIGGLE BODY PARTS WHILE MOVING
 //  Keywords: ShoulderFront, ElbowFront, HipFront, HipBack
-//////////////////////////////////////
-
 tlWiggle
   .add("wiggle")
   .to(c.ShoulderFront, timeUnit/2, { y: 2, x: 0, rotation: 60, ease: Power1.easeInOut }, "wiggle")
@@ -260,6 +328,14 @@ tlWiggle
   .to(c.HipBack, timeUnit/2, { rotation: -10 }, "wiggle =+" + timeUnit*2)
   ;
 
+tlStepPush
+  .add(tlStep.restart(), 0) // Duration 0.9
+  .add(tlPush.restart(), 0) // Duration 1.05
+  .add(tlWiggle.restart(), 0) // Duration 0.9
+  .add("afterStepPush")
+  ;
+
+
 
 //  Punch
 //  Keywords: whole body
@@ -268,48 +344,70 @@ tlWiggle
 tlPunch.timeScale(1)
   .add("suspend")
   // Primary
-  .to(c.ShoulderBack, timeUnit, { rotation: 80, ease: Power1.easeInOut }, "suspend")
-  .to(c.ElbowBack, timeUnit, { rotation: 20, ease: Power1.easeInOut }, "suspend")
+  .to(c.ShoulderBack, timeUnit/4, { rotation: 80, ease: Power1.easeInOut }, "suspend")
+  .to(c.ElbowBack, timeUnit/4, { rotation: 20, ease: Power1.easeInOut }, "suspend")
   // Secondary
-  .to(c.Neck, timeUnit, { rotation: -30, ease: Power1.easeInOut }, "suspend")
-  .to(c.Head, timeUnit, { rotation: 10, ease: Power1.easeInOut }, "suspend")
-  .to(c.ShoulderFront, timeUnit, { rotation: 70, ease: Power1.easeInOut}, "suspend")
-  .to(c.ElbowFront, timeUnit, { rotation: 80, ease: Power1.easeInOut}, "suspend")
-  .to(c.HipBack, timeUnit, { rotation: -5, ease: Power1.easeInOut }, "suspend")
-  .to(c.HipFront, timeUnit, { rotation: -10, ease: Power1.easeInOut }, "suspend")
+  .to(c.Neck, timeUnit/4, { rotation: -30, ease: Power1.easeInOut }, "suspend")
+  .to(c.Head, timeUnit/4, { rotation: 10, ease: Power1.easeInOut }, "suspend")
+  .to(c.ShoulderFront, timeUnit/4, { rotation: 70, ease: Power1.easeInOut}, "suspend")
+  .to(c.ElbowFront, timeUnit/4, { rotation: 80, ease: Power1.easeInOut}, "suspend")
+  .to(c.HipBack, timeUnit/4, { rotation: -5, ease: Power1.easeInOut }, "suspend")
+  .to(c.HipFront, timeUnit/4, { rotation: -10, ease: Power1.easeInOut }, "suspend")
 
-  .add("release", "suspend =+" + timeUnit)
+  .add("release", "suspend =+" + timeUnit/4)
   // Primary
-  .to(c.ShoulderBack, timeUnit, { rotation: 140, x: -5, y: -15, ease: Power1.easeInOut }, "release")
-  .to(c.ElbowBack, timeUnit, { rotation: -40, ease: Power1.easeInOut }, "release")
-  .to(c.WristBack, timeUnit, { rotation: 0, ease: Power1.easeOut }, "release")
+  .to(c.ShoulderBack, timeUnit/4, { rotation: 140, x: -5, y: -15, ease: Power1.easeIn }, "release")
+  .to(c.ElbowBack, timeUnit/4, { rotation: -40, ease: Power1.easeIn }, "release")
+  .to(c.WristBack, timeUnit/4, { rotation: 0, ease: Power1.easeIn }, "release")
   .set(c.fingers, { autoAlpha: 0}, "release")
   .set(c.noFingers, { autoAlpha: 1}, "release")
-  .to(c.body, timeUnit, { x: "-=40", y: 35, rotation: -15, ease: Power1.easeInOut }, "release")
-  .to(c.LegBack, timeUnit, { rotation: 55, ease: Power1.easeNone }, "release")
+  .to(c.body, timeUnit/4, { x: "-=40", y: 35, rotation: -15, ease: Power1.easeIn }, "release")
+  .to(c.LegBack, timeUnit/4, { rotation: 55, ease: Power1.easeNone }, "release")
   
   // Secondary
-  .to(c.Neck, timeUnit, { rotation: 20, ease: Power1.easeInOut }, "release")
-  .to(c.Head, timeUnit, { rotation: 30, ease: Power1.easeInOut }, "release")
-  .to(c.ShoulderFront, timeUnit, { rotation: 0, x: 5, ease: Power1.easeInOut}, "release")
-  .to(c.ElbowFront, timeUnit, { rotation: 80, ease: Power1.easeInOut}, "release")
-  .to(c.HipFront, timeUnit, { rotation: 0, ease: Power1.easeInOut }, "release")
+  .to(c.Neck, timeUnit/4, { rotation: 20, ease: Power1.easeIn }, "release")
+  .to(c.Head, timeUnit/4, { rotation: 30, ease: Power1.easeIn }, "release")
+  .to(c.ShoulderFront, timeUnit/4, { rotation: 0, x: 5, ease: Power1.easeIn}, "release")
+  .to(c.ElbowFront, timeUnit/4, { rotation: 80, ease: Power1.easeIn}, "release")
+  .to(c.HipFront, timeUnit/2, { rotation: 0, ease: Power1.easeIn }, "release")
   ;
+
+
+
+//  MAIN CONOR TIMELINE
+//  Keywords: Conor all moves
+///////////////////////////////////////
 
 tlConor
   .add("start")
-  .add(tlStep.play(), "start") // Duration 0.9
-  .add(tlPush.play(), "start") // Duration 1.05
-  .add(tlWiggle.play(), "start") // Duration 0.9
-  .add(tlPunch.play(), "afterPush") // Duration ?
+  .add(tlImpact.play(), "start") // Duration ?
+  .add(tlStepPush.play(), "afterImpact") // Duration: 1.05
+  .add(tlPunch.play(), "afterStepPush") // Duration ?
   ;
+
+
+
+//  INIT CONOR
+//  Keywords: -
+///////////////////////////////////////
 
 tlConor.play().timeScale(1);
 
-// Punch: stretch arm fast, rotate torso, pull back back arm
-// Bend knees, tilt forward, stretch legs
-// Bend elbow
-// Flip fist
+
+
+
+
+/*
+///////////////////////////////////////
+
+  End of TIMELINES
+
+##############################################################################
+*/
+
+
+
+
 
 
 
