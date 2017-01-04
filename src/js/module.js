@@ -2,11 +2,12 @@
 ##############################################################################
 
   TODO
+  
+  - Hard left: strech leg, tilt forward, move forward
+
 
   - Capital first letters may be a problem in data-attributes
-  - Open uo chest and add ambient torso movement to tlImpact
-
-
+  
 
 // Find move
 // Rough out sequence
@@ -102,20 +103,20 @@ function conorStartPose() {
   TweenMax.set(c.KneeFront, { rotation: 0, transformOrigin: "center"});
   TweenMax.set(c.LegFront, { rotation: -20, transformOrigin: "center"});
   TweenMax.set(c.HipFront, { rotation: 0, transformOrigin: "center"});
-  TweenMax.set(c.SpineFront, { rotation: 0, transformOrigin: "center"});
+  TweenMax.set(c.SpineFront, { rotation: -10, transformOrigin: "center"});
   TweenMax.set(c.ShoulderFront, { rotation: 55, transformOrigin: "center"});
   TweenMax.set(c.ElbowFront, { rotation: 80, transformOrigin: "center"});
   TweenMax.set(c.WristFront, { rotation: 0, transformOrigin: "center"});
   TweenMax.set(c.Neck, { rotation: 0, transformOrigin: "center"});
   TweenMax.set(c.Head, { rotation: 0, transformOrigin: "center"});
   // Position
-  TweenMax.set(c.ShoulderBack, { x: 12 });
-  TweenMax.set(c.HipBack, { x: 6 });
-  TweenMax.set(c.LegBack, { x: 6 });
+  TweenMax.set(c.ShoulderBack, { x: 0 });
+  TweenMax.set(c.HipBack, { x: 0 });
+  TweenMax.set(c.LegBack, { x: 0 });
   TweenMax.set(c.Neck, { x: 0 });
-  TweenMax.set(c.LegFront, { x: -6 });
-  TweenMax.set(c.HipFront, { x: -6 });
-  TweenMax.set(c.ShoulderFront, { x: -12 });
+  TweenMax.set(c.LegFront, { x: 0 });
+  TweenMax.set(c.HipFront, { x: 0 });
+  TweenMax.set(c.ShoulderFront, { x: 0, y: 5 });
   // Visibility
   TweenMax.set(c.fingers, { autoAlpha: 1 });
   TweenMax.set(c.noFingers, { autoAlpha: 0 });
@@ -193,12 +194,13 @@ setStartingValues();
 const timeUnit = 0.3;
 
 const tlConor = new TimelineMax({ repeat: -1, repeatDelay: 2, onUpdate:updateStats, onUpdateParams: tlConor });
+const tlImpact = new TimelineMax({ paused: true });
+const tlStepPush = new TimelineMax({ paused: true });
 const tlStep = new TimelineMax({ paused: true });
 const tlPush = new TimelineMax({ paused: true });
-const tlStepPush = new TimelineMax({ paused: true });
 const tlWiggle = new TimelineMax({ paused: true });
 const tlPunch = new TimelineMax({ paused: true });
-const tlImpact = new TimelineMax({ paused: true });
+const tlStrike = new TimelineMax({ paused: true });
 
 
 
@@ -344,32 +346,124 @@ tlStepPush
 tlPunch.timeScale(1)
   .add("suspend")
   // Primary
-  .to(c.ShoulderBack, timeUnit/4, { rotation: 80, ease: Power1.easeInOut }, "suspend")
-  .to(c.ElbowBack, timeUnit/4, { rotation: 20, ease: Power1.easeInOut }, "suspend")
+  .to(c.ShoulderBack, timeUnit/3, { rotation: 80, y: 5, ease: Power1.easeInOut }, "suspend")
+  .to(c.ElbowBack, timeUnit/3, { rotation: 20, ease: Power1.easeInOut }, "suspend")
   // Secondary
-  .to(c.Neck, timeUnit/4, { rotation: -30, ease: Power1.easeInOut }, "suspend")
-  .to(c.Head, timeUnit/4, { rotation: 10, ease: Power1.easeInOut }, "suspend")
-  .to(c.ShoulderFront, timeUnit/4, { rotation: 70, ease: Power1.easeInOut}, "suspend")
-  .to(c.ElbowFront, timeUnit/4, { rotation: 80, ease: Power1.easeInOut}, "suspend")
-  .to(c.HipBack, timeUnit/4, { rotation: -5, ease: Power1.easeInOut }, "suspend")
-  .to(c.HipFront, timeUnit/4, { rotation: -10, ease: Power1.easeInOut }, "suspend")
+  .to(c.Neck, timeUnit/3, { rotation: -30, ease: Power1.easeInOut }, "suspend")
+  .to(c.Head, timeUnit/3, { rotation: 20, ease: Power1.easeInOut }, "suspend")
+  .to(c.ShoulderFront, timeUnit/3, { rotation: 70, ease: Power1.easeInOut}, "suspend")
+  .to(c.ElbowFront, timeUnit/3, { rotation: 80, ease: Power1.easeInOut}, "suspend")
+  .to(c.HipBack, timeUnit/3, { rotation: -5, ease: Power1.easeInOut }, "suspend")
+  .to(c.HipFront, timeUnit/3, { rotation: -10, ease: Power1.easeInOut }, "suspend")
 
-  .add("release", "suspend =+" + timeUnit/4)
+  .add("release", "suspend =+" + timeUnit/3)
   // Primary
-  .to(c.ShoulderBack, timeUnit/4, { rotation: 140, x: -5, y: -15, ease: Power1.easeIn }, "release")
-  .to(c.ElbowBack, timeUnit/4, { rotation: -40, ease: Power1.easeIn }, "release")
-  .to(c.WristBack, timeUnit/4, { rotation: 0, ease: Power1.easeIn }, "release")
+  .to(c.SpineBack, timeUnit/3, { rotation: -10, ease: Power1.easeIn }, "release")
+  .to(c.ShoulderBack, timeUnit/3, { rotation: 150, x: 0, y: -10, ease: Power1.easeIn }, "release")
+  .to(c.ElbowBack, timeUnit/3, { rotation: -30, ease: Back.easeOut }, "release")
+  .to(c.WristBack, timeUnit/3, { rotation: 10, ease: Power1.easeIn }, "release")
   .set(c.fingers, { autoAlpha: 0}, "release")
   .set(c.noFingers, { autoAlpha: 1}, "release")
-  .to(c.body, timeUnit/4, { x: "-=40", y: 35, rotation: -15, ease: Power1.easeIn }, "release")
-  .to(c.LegBack, timeUnit/4, { rotation: 55, ease: Power1.easeNone }, "release")
-  
+  .to(c.body, timeUnit/3, { x: "-=40", y: 35, rotation: -15, ease: Power1.easeIn }, "release")
+  .to(c.LegBack, timeUnit/3, { rotation: 55, ease: Power1.easeNone }, "release")
+  .to(c.LegFront, timeUnit/3, { rotation: -15, ease: Power1.easeNone }, "release")
+
   // Secondary
-  .to(c.Neck, timeUnit/4, { rotation: 20, ease: Power1.easeIn }, "release")
-  .to(c.Head, timeUnit/4, { rotation: 30, ease: Power1.easeIn }, "release")
-  .to(c.ShoulderFront, timeUnit/4, { rotation: 0, x: 5, ease: Power1.easeIn}, "release")
-  .to(c.ElbowFront, timeUnit/4, { rotation: 80, ease: Power1.easeIn}, "release")
-  .to(c.HipFront, timeUnit/2, { rotation: 0, ease: Power1.easeIn }, "release")
+  .to(c.Neck, timeUnit/3, { rotation: 30, ease: Power1.easeIn }, "release")
+  .to(c.Head, timeUnit/3, { rotation: 0, y: 5, ease: Power1.easeIn }, "release")
+  .to(c.ShoulderFront, timeUnit/3, { rotation: 0, x: 5, y: 5 , ease: Power1.easeOut}, "release")
+  .to(c.ElbowFront, timeUnit/3, { rotation: 130, ease: Power1.easeIn}, "release")
+  .to(c.HipFront, timeUnit/3, { rotation: 0, ease: Power1.easeIn }, "release")
+
+  // After
+  //.to(c.ShoulderBack, timeUnit, { rotation: 170, ease: Power1.easeIn }, "release")
+  .add("afterPunch")
+  ;
+
+
+
+//  STRIKE HARD LEFT
+//  Keywords: Last aggression
+///////////////////////////////////////
+
+tlStrike.timeScale(1)
+  .add("strike")
+  .to(c.LegFront, timeUnit, { rotation: -15, ease: Power1.easeInOut }, "strike")
+  .to(c.KneeFront, timeUnit, { rotation: -5, ease: Power1.easeInOut }, "strike")
+  .to(c.body, timeUnit, { rotation: -25, x: "-=15", ease: Power1.easeInOut }, "strike")
+
+  // Leg and hip back
+  .to(c.LegBack, timeUnit, { x: "+=5", rotation: 65, ease: Power1.easeInOut }, "strike")
+  .to(c.HipBack, timeUnit, { x: "+=5", ease: Power1.easeInOut }, "strike")
+  .to(c.KneeBack, timeUnit, { rotation: -35, ease: Power1.easeInOut }, "strike")
+
+  // Rotate torso
+  .to(c.HipBack, timeUnit, { rotation: 0, ease: Power1.easeInOut }, "strike")
+  .to(c.HipFront, timeUnit, { rotation: -10, ease: Power1.easeInOut }, "strike")
+  .to(c.SpineBack, timeUnit, { rotation: 10, ease: Power1.easeInOut }, "strike")
+  .to(c.SpineFront, timeUnit, { rotation: -30, ease: Power2.easeIn }, "strike")
+
+  // Move head
+  .to(c.Neck, timeUnit, { rotation: 10, x: -15, ease: Power2.easeIn }, "strike")
+  .to(c.Head, timeUnit, { rotation: 40, ease: Power1.easeIn }, "strike")
+
+  // Pull back right
+  .to(c.ShoulderBack, timeUnit/2, { rotation: 150, x: 0, y: -10, ease: Power4.easeOut }, "strike")
+  .to(c.ShoulderBack, timeUnit, { rotation: -60, x: 20, y: 5, ease: Power3.easeOut }, "strike =+" + timeUnit*0.5)
+  .to(c.ElbowBack, timeUnit, { rotation: 20, ease: Power1.easeIn }, "strike")
+  
+  // Throw left
+  .to(c.ShoulderFront, timeUnit, { rotation: 180, x: -20, y: -15, ease: Power4.easeIn }, "strike")
+  .to(c.ElbowFront, timeUnit, { rotation: -20, ease: Power4.easeIn }, "strike")
+
+  .add("pullBack")
+  // Upper body
+  .to(c.ShoulderFront, timeUnit*3, { rotation: 0, x: 0, y: 5, ease: Power2.easeNone }, "pullBack")
+  .to(c.ElbowFront, timeUnit*3, { rotation: 90, ease: Power3.easeOut }, "pullBack")
+  .to(c.HipBack, timeUnit*3, { rotation: 0, ease: Back.easeOut }, "pullBack")
+  .to(c.HipFront, timeUnit*3, { rotation: 0, ease: Back.easeOut }, "pullBack")
+  .to(c.SpineBack, timeUnit*3, { rotation: -10, ease: Back.easeIn }, "pullBack")
+  .to(c.SpineFront, timeUnit*3, { rotation: 0, ease: Back.easeIn }, "pullBack")
+  .to(c.ShoulderBack, timeUnit*3, { rotation: 40, x: 5, y: -5, ease: Power1.easeNone }, "pullBack")
+  .to(c.ElbowBack, timeUnit*3, { rotation: 45, ease: Power2.easeIn }, "pullBack")
+
+  .to(c.Neck, timeUnit, { rotation: 0, x: 0, y: 0, ease: Power2.easeNone }, "pullBack")
+  .to(c.Head, timeUnit, { rotation: 30, ease: Power2.easeNone }, "pullBack")
+  .to(c.Neck, timeUnit*2, { rotation: 25, x: -4, y: -3, ease: Power2.easeNone }, "pullBack =+" + timeUnit)
+  .to(c.Head, timeUnit*2, { rotation: -5, ease: Power2.easeNone }, "pullBack =+" + timeUnit)
+
+  // Lower body
+  .to(c.body, timeUnit/2, { rotation: -28, x: "-=5", ease: Power1.easeNone }, "pullBack")
+  .to(c.LegBack, timeUnit/2, { rotation: 68, ease: Power1.easeNone }, "pullBack")
+  .to(c.KneeBack, timeUnit/2, { rotation: -37, ease: Power1.easeNone }, "pullBack")
+  .to(c.LegFront, timeUnit/2, { rotation: -5, ease: Power1.easeNone }, "pullBack")
+  .to(c.KneeFront, timeUnit/2, { rotation: -25, ease: Power1.easeNone }, "pullBack")
+
+  .to(c.body, timeUnit/2, { rotation: -15, x: "-=25", y: 15, ease: Power1.easeIn }, "pullBack =+" + timeUnit/2)
+  .to(c.LegBack, timeUnit/2, { rotation: 30, ease: Power1.easeIn }, "pullBack =+" + timeUnit/2)
+  .to(c.KneeBack, timeUnit/2, { rotation: -10, ease: Power1.easeIn }, "pullBack =+" + timeUnit/2)
+  .to(c.LegFront, timeUnit/2, { rotation: -5, ease: Power1.easeIn }, "pullBack =+" + timeUnit/2)
+  .to(c.KneeFront, timeUnit/2, { rotation: -25, ease: Power1.easeIn }, "pullBack =+" + timeUnit/2)
+  
+  .to(c.body, timeUnit/2, { rotation: -10, x: "+=20", y: 20, ease: Power1.easeOut }, "pullBack =+" + timeUnit)
+  .to(c.LegBack, timeUnit/2, { rotation: 35, x: "-=5", ease: Power1.easeOut }, "pullBack =+" + timeUnit)
+  .to(c.HipBack, timeUnit/2, { x: "-=5", ease: Power1.easeOut }, "pullBack =+" + timeUnit)
+  .to(c.KneeBack, timeUnit/2, { rotation: -20, ease: Power1.easeOut }, "pullBack =+" + timeUnit)
+  .to(c.LegFront, timeUnit/2, { rotation: -15, ease: Power1.easeOut }, "pullBack =+" + timeUnit)
+  .to(c.KneeFront, timeUnit/2, { rotation: -5, ease: Power3.easeOut }, "pullBack =+" + timeUnit)
+
+  .to(c.body, timeUnit/2, { y: 15, x: "-=5", ease: Power1.easeOut }, "pullBack =+" + timeUnit*1.5)
+  .to(c.LegBack, timeUnit/2, { rotation: 30, ease: Power1.easeOut }, "pullBack =+" + timeUnit*1.5)
+  .to(c.KneeBack, timeUnit/2, { rotation: -15, ease: Power1.easeOut }, "pullBack =+" + timeUnit*1.5)
+  .to(c.LegFront, timeUnit/2, { rotation: -15, ease: Power1.easeOut }, "pullBack =+" + timeUnit*1.5)
+  .to(c.KneeFront, timeUnit/2, { rotation: 0, ease: Power3.easeOut }, "pullBack =+" + timeUnit*1.5)
+
+  .to(c.body, timeUnit, { y: 20, ease: Power1.easeIn }, "pullBack =+" + timeUnit*2)
+  .to(c.LegBack, timeUnit, { rotation: 35, ease: Power1.easeIn }, "pullBack =+" + timeUnit*2)
+  .to(c.KneeBack, timeUnit, { rotation: -25, ease: Power1.easeIn }, "pullBack =+" + timeUnit*2)
+  .to(c.LegFront, timeUnit, { rotation: -14, ease: Power1.easeIn }, "pullBack =+" + timeUnit*2)
+  .to(c.KneeFront, timeUnit, { rotation: -5, ease: Power3.easeIn }, "pullBack =+" + timeUnit*2)
+
   ;
 
 
@@ -380,9 +474,10 @@ tlPunch.timeScale(1)
 
 tlConor
   .add("start")
-  .add(tlImpact.play(), "start") // Duration ?
-  .add(tlStepPush.play(), "afterImpact") // Duration: 1.05
-  .add(tlPunch.play(), "afterStepPush") // Duration ?
+  .add(tlImpact.play(), "start")
+  .add(tlStepPush.play(), "afterImpact")
+  .add(tlPunch.play(), "afterStepPush")
+  .add(tlStrike.play(), "afterPunch")
   ;
 
 
