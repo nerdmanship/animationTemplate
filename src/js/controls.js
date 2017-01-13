@@ -12,6 +12,8 @@ function controlTimeline(timeline) {
   var duration = document.getElementById("duration");
   var time = document.getElementById("time");
   var controls = document.getElementById("controls");
+  var togglePlay = document.getElementById("togglePlay");
+  var playing = true;
 
   var slider = document.createElement("INPUT");
   slider.setAttribute("type", "range");
@@ -21,8 +23,12 @@ function controlTimeline(timeline) {
   slider.setAttribute("max", "1");
   controls.appendChild(slider);
 
-  slider.addEventListener("mouseover", function(){ timeline.pause(); })
-  slider.addEventListener("mouseout", function(){ timeline.resume(); })
+  slider.addEventListener("mousedown", function(){ timeline.pause(); })
+  slider.addEventListener("mouseup", function(){ 
+    if (playing) {
+      timeline.resume(); }
+  })
+      
 
   read("mousedown");
   read("mousemove");
@@ -34,6 +40,16 @@ function controlTimeline(timeline) {
       });
     });
   }
+
+  togglePlay.addEventListener("mousedown", function(){
+    if (playing) {
+      playing = false;
+      timeline.pause();
+    } else {
+      playing = true;
+      timeline.resume();
+    }
+  })
 }
 
 function updateStats() {
@@ -43,4 +59,4 @@ function updateStats() {
   }
 
 //  INIT
-controlTimeline(tlConor);
+controlTimeline(tlFighters);
