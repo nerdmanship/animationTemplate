@@ -1084,12 +1084,11 @@ tlFighting
   ;
 
 
-tlFighters.timeScale(1).seek(5)
+tlFighters.timeScale(1)
   .add(tlFighting.play())
   .add(tlWalking.play(), "fightOver")
   ;
 
-// Left hand guard, crouch forward, charge right
 
 
 /*
@@ -1147,63 +1146,3 @@ function testDurations() {
 }
 
 testDurations();
-
-
-
-
-
-
-/*
-
-.to(c.body, timeUnit*5.5, { x: "+=90", ease: Power1.easeIn }, "retreat1 =+" + timeUnit/2)
-
-  // Lift back foot
-  .to(c.body, timeUnit/2, { rotation: "+=2", y: "-=2", ease: Power1.easeOut }, "retreat1")
-  .to(c.LegBack, timeUnit/2, { rotation: "+=5", ease: Back.easeOut }, "retreat1")
-  .to(c.KneeBack, timeUnit, { rotation: "-=20", ease: Power1.easeInOut }, "retreat1")
-  // Down back foot
-  .to(c.body, timeUnit/2, { rotation: "-=1", ease: Power1.easeInOut }, "retreat1 =+" + timeUnit/2)
-  .to(c.LegBack, timeUnit/2, { rotation: "-=10", ease: Power1.easeOut }, "retreat1 =+" + timeUnit/2)
-  // Stretch back foot
-  .to(c.body, timeUnit, { rotation: -10, y: 20, ease: Power1.easeInOut }, "retreat1 =+" + timeUnit)
-  .to(c.LegBack, timeUnit, { rotation: 35, ease: Power1.easeIn }, "retreat1 =+" + timeUnit)
-  .to(c.KneeBack, timeUnit, { rotation: -25, ease: Power1.easeOut }, "retreat1 =+" + timeUnit)
-  // Front foot
-  .to(c.KneeFront, timeUnit/2, { rotation: "-=10", ease: Power1.easeInOut }, "retreat1 =+" + timeUnit)
-  .to(c.LegFront, timeUnit/2, { rotation: -14, ease: Power1.easeOut }, "retreat1 =+" + timeUnit*1.5)
-  .to(c.KneeFront, timeUnit/2, { rotation: -5, ease: Power3.easeOut }, "retreat1 =+" + timeUnit*1.5)
-  
-  .add("retreat2", "retreat1 =+" + timeUnit*2)
-  // Lift back foot
-  .to(c.body, timeUnit/2, { rotation: "+=2", y: "-=2", ease: Power1.easeOut }, "retreat2")
-  .to(c.LegBack, timeUnit/2, { rotation: "+=5", ease: Back.easeOut }, "retreat2")
-  .to(c.KneeBack, timeUnit, { rotation: "-=20", ease: Power1.easeInOut }, "retreat2")
-  // Down back foot
-  .to(c.body, timeUnit/2, { rotation: "-=1", ease: Power1.easeInOut }, "retreat2 =+" + timeUnit/2)
-  .to(c.LegBack, timeUnit/2, { rotation: "-=10", ease: Power1.easeOut }, "retreat2 =+" + timeUnit/2)
-  // Stretch back foot
-  .to(c.body, timeUnit, { rotation: -10, y: 20, ease: Power1.easeInOut }, "retreat2 =+" + timeUnit)
-  .to(c.LegBack, timeUnit, { rotation: 35, ease: Power1.easeIn }, "retreat2 =+" + timeUnit)
-  .to(c.KneeBack, timeUnit, { rotation: -25, ease: Power1.easeOut }, "retreat2 =+" + timeUnit)
-  // Front foot
-  .to(c.KneeFront, timeUnit/2, { rotation: "-=10", ease: Power1.easeInOut }, "retreat2 =+" + timeUnit)
-  .to(c.LegFront, timeUnit/2, { rotation: -14, ease: Power1.easeOut }, "retreat2 =+" + timeUnit*1.5)
-  .to(c.KneeFront, timeUnit/2, { rotation: -5, ease: Power3.easeOut }, "retreat2 =+" + timeUnit*1.5)
-
-  .add("retreat3", "retreat2 =+" + timeUnit*2)
-  // Lift back foot
-  .to(c.body, timeUnit/2, { rotation: "+=2", y: "-=2", ease: Power1.easeOut }, "retreat3")
-  .to(c.LegBack, timeUnit/2, { rotation: "+=5", ease: Back.easeOut }, "retreat3")
-  .to(c.KneeBack, timeUnit, { rotation: "-=20", ease: Power1.easeInOut }, "retreat3")
-  // Down back foot
-  .to(c.body, timeUnit/2, { rotation: "-=1", ease: Power1.easeInOut }, "retreat3 =+" + timeUnit/2)
-  .to(c.LegBack, timeUnit/2, { rotation: "-=10", ease: Power1.easeOut }, "retreat3 =+" + timeUnit/2)
-  // Stretch back foot
-  .to(c.body, timeUnit, { rotation: -10, y: 20, ease: Power1.easeInOut }, "retreat3 =+" + timeUnit)
-  .to(c.LegBack, timeUnit, { rotation: 35, ease: Power1.easeIn }, "retreat3 =+" + timeUnit)
-  .to(c.KneeBack, timeUnit, { rotation: -25, ease: Power1.easeOut }, "retreat3 =+" + timeUnit)
-  // Front foot
-  .to(c.KneeFront, timeUnit/2, { rotation: "-=10", ease: Power1.easeInOut }, "retreat3 =+" + timeUnit)
-  .to(c.LegFront, timeUnit/2, { rotation: -14, ease: Power1.easeOut }, "retreat3 =+" + timeUnit*1.5)
-  .to(c.KneeFront, timeUnit/2, { rotation: -5, ease: Power3.easeOut }, "retreat3 =+" + timeUnit*1.5)
-  */
